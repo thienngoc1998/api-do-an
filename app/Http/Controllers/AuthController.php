@@ -85,8 +85,13 @@ class AuthController extends Controller
 
     public function profile()
     {
-        return response()->json($this->guard()->user());
-
+        try {
+            return response()->json($this->guard()->user());
+        } catch (ModelNotFoundException $ex) { // User not found
+            abort(422, 'Invalid email: administrator not found');
+        } catch (Exception $ex) { // Anything that went wrong
+            abort(500, 'Could not create office or assign it to administrator');
+        }
     }
 
 
