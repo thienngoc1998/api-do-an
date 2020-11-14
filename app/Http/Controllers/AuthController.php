@@ -11,11 +11,11 @@ class AuthController extends Controller
 {
 
 
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api', ['except' => ['login', 'register']]);
 
-    }
+    // }
     public function login(Request $request)
     {
         $validator = Validator::make(
@@ -81,6 +81,10 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'User logged out successfully']);
 
+    }
+    public function hehe($key)
+    {
+        return $key;
     }
 
 

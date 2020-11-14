@@ -28,3 +28,14 @@ Route::group(
         Route::post('refresh', 'AuthController@refresh');
     }
 );
+Route::group(
+    [
+        'namespace'  => 'App\Http\Controllers',
+        'prefix'     => 'test',
+    ],
+    function ($router) {
+        Route::get('hehe/{key}', 'AuthController@hehe');
+    }
+);
+
+
