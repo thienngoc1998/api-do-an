@@ -70,8 +70,7 @@ class AuthController extends Controller
         if (!$token = $this->guard()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return  $this->respondWithToken($token);;
-
+        return  $this->respondWithToken($token);
     }
 
 
