@@ -86,7 +86,7 @@ class AuthController extends Controller
 
     public function profile()
     {
-        return response()->json($this->guard()->user());
+        return $this->guard()->user();
 
     }
 
