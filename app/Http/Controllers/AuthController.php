@@ -70,7 +70,8 @@ class AuthController extends Controller
         if (!$token = $this->guard()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return  $this->respondWithToken($token);
+        return $this->respondWithToken($token);;
+
     }
 
 
@@ -85,13 +86,8 @@ class AuthController extends Controller
 
     public function profile()
     {
-        try {
-            return response()->json($this->guard()->user());
-        } catch (ModelNotFoundException $ex) { // User not found
-            abort(422, 'Invalid email: administrator not found');
-        } catch (Exception $ex) { // Anything that went wrong
-            abort(500, 'Could not create office or assign it to administrator');
-        }
+        return response()->json($this->guard()->user());
+
     }
 
 
