@@ -15,7 +15,6 @@ class CreateDescriptionProductTable extends Migration
     {
         Schema::create('description_product', function (Blueprint $table) {
             $table->increments("id");
-           
             $table->string("time_used");
             $table->string("current_status");
             $table->string("material")->nullable();;

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,25 +19,19 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     [
         'middleware' => 'api',
-        'namespace'  => 'App\Http\Controllers',
-        'prefix'     => 'auth',
+        'prefix' => 'auth',
     ],
-    function ($router) {
-        Route::post('login', 'AuthController@login');
-        Route::post('register', 'AuthController@register');
-        Route::post('logout', 'AuthController@logout');
-        Route::get('profile', 'AuthController@profile');
-        Route::post('refresh', 'AuthController@refresh');
+    function () {
+        Route::post('login', [AuthController::class, 'login']);
+//        Route::post('register', 'AuthController@register');
     }
 );
-Route::group(
-    [
-        'namespace'  => 'App\Http\Controllers',
-        'prefix'     => 'test',
-    ],
-    function ($router) {
-        Route::get('hehe/{key}', 'AuthController@hehe');
-    }
-);
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::group(['prefix' => 'user'], function() {
+       Route::get('/', [UserController::class, 'index']);
+       Route::get('/{id}', [UserController::class, 'show']);
+   });
+});
 
 
